@@ -1,66 +1,109 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+<h1 align="center">🌬️ Laravel + Tailwind CSS Starter</h1>
 
 <p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
+  A minimal Laravel 10 boilerplate with Tailwind CSS 3 wired through Vite 4 –<br>
+  clone it to skip the asset-pipeline setup on your next project.
 </p>
 
-## About Laravel
+<p align="center">
+  <a href="#-quick-start">🚀 Quick Start</a> •
+  <a href="#-scripts">📦 Scripts</a> •
+  <a href="#-structure">🏗️ Structure</a> •
+  <a href="#-configuration">⚙️ Configuration</a>
+</p>
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+<p align="center">
+  <img src="https://img.shields.io/badge/Laravel-10-FF2D20?logo=laravel&logoColor=white" alt="Laravel 10">
+  <img src="https://img.shields.io/badge/PHP-8.1%2B-777BB4?logo=php&logoColor=white" alt="PHP 8.1">
+  <img src="https://img.shields.io/badge/Tailwind-3-06B6D4?logo=tailwindcss&logoColor=white" alt="Tailwind CSS 3">
+  <img src="https://img.shields.io/badge/Vite-4-646CFF?logo=vite&logoColor=white" alt="Vite 4">
+</p>
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+---
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## 🌟 Highlights
 
-## Learning Laravel
+- 🎨 **Tailwind CSS 3** loaded as a PostCSS plugin directly inside `vite.config.js` (plus `autoprefixer`)
+- 📁 **Predictable output** – Vite writes to `public/assets/{css,js}` with stable file names (`js/app.js`, `css/app.css`) and a `manifest.json`, so the compiled assets can be committed and served without a build step on the server
+- 🔐 **Sanctum**, **Pint**, **Sail** and **PHPUnit 10** come with the Laravel 10 skeleton
+- 🌓 Default welcome page already uses Tailwind utility classes with dark-mode variants
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## ✨ What's inside
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+The stock Laravel 10.12 skeleton (`/` → `welcome.blade.php`, `User` model, four default migrations) plus:
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+- `tailwind.config.js` scanning `resources/**/*.{blade.php,js,vue}`
+- `resources/css/app.css` importing Tailwind's base/components/utilities layers
+- A customised `vite.config.js` (`outDir: public/assets`, `manifest: true`, fixed entry/chunk/asset names)
+- Pre-built assets in `public/assets/` (committed)
 
-## Laravel Sponsors
+## 🚀 Quick Start
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+```bash
+composer install
+cp .env.example .env
+php artisan key:generate
+npm install
+npm run build      # or npm run dev for HMR
+php artisan serve  # http://localhost:8000
+```
 
-### Premium Partners
+## 📦 Scripts
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+| Script          | Description                                   |
+| --------------- | --------------------------------------------- |
+| `npm run dev`   | Vite dev server with HMR                      |
+| `npm run build` | Production build to `public/assets`           |
 
-## Contributing
+## 🏗️ Structure
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+```
+.
+├── app/                  # Laravel 10 skeleton (Models/User.php, Http, Providers…)
+├── config/
+├── database/             # factories, migrations, seeders
+├── public/
+│   └── assets/           # Vite output: css/app.css, js/app.js, manifest.json
+├── resources/
+│   ├── css/app.css       # Tailwind layers
+│   ├── js/app.js, bootstrap.js
+│   └── views/welcome.blade.php
+├── routes/
+├── tests/                # Feature/ExampleTest, Unit/ExampleTest
+├── postcss.config.js
+├── tailwind.config.js
+└── vite.config.js
+```
 
-## Code of Conduct
+## ⚙️ Configuration
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+Environment variables (from `.env.example`): `APP_NAME`, `APP_ENV`, `APP_KEY`, `APP_DEBUG`, `APP_URL`, `LOG_*`, `DB_*`, `BROADCAST_DRIVER`, `CACHE_DRIVER`, `FILESYSTEM_DISK`, `QUEUE_CONNECTION`, `SESSION_*`, `MEMCACHED_HOST`, `REDIS_*`, `MAIL_*`, `AWS_*`, `PUSHER_*`, `VITE_PUSHER_*`.
 
-## Security Vulnerabilities
+The welcome view links the compiled stylesheet directly (`<link href="assets/css/app.css">`) instead of using the `@vite` directive; if you switch to `@vite`, point it at the custom output directory with `Vite::useBuildDirectory('assets')` or remove the `build` block in `vite.config.js` to return to the default `public/build`.
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+## 🚀 Deployment
 
-## License
+Standard Laravel: web root at `public/`, `composer install --no-dev --optimize-autoloader`, `php artisan migrate --force`, `npm run build` (or deploy the committed `public/assets`), then `php artisan optimize`.
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+## 🧪 Testing
+
+```bash
+php artisan test
+```
+
+## 📄 License
+
+No license has been chosen yet.
+
+## 👤 Author
+
+**Jackson Makinda** – [makindajackson.com](https://makindajackson.com)
+
+- 📧 Email: me@makindajackson.com
+- 💼 LinkedIn: [Jackson Makinda](https://linkedin.com/in/makindajack)
+- 🎨 Dribbble: [@makindajack](https://dribbble.com/makindajack)
+- 🐦 Twitter: [@makindajack](https://twitter.com/makindajack)
+
+---
+
+Built with ❤️ in Dar es Salaam, Tanzania 🇹🇿
